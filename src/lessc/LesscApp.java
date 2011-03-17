@@ -74,8 +74,6 @@ public class LesscApp extends SingleFrameApplication {
       
     }
 
-
-
     class CheckDirTask extends TimerTask {
         private WatchService s;
 
