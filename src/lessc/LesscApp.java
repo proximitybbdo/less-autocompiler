@@ -31,6 +31,8 @@ public class LesscApp extends SingleFrameApplication {
     public Path watchedPath;
     public LesscView view;
 
+    private final static String newline = "\n";
+
     /**
      * At startup create and show the main frame of the application.
      */
@@ -46,8 +48,7 @@ public class LesscApp extends SingleFrameApplication {
     public void startWatching(String path){
         this.path = path;
 
-        System.out.println(path);
-        
+        view.txtLog.append("Monitoring: " + this.path + newline);
 
         service = FileSystems.getDefault().newWatchService();
         watchedPath = Paths.get(path);
@@ -97,25 +98,22 @@ public class LesscApp extends SingleFrameApplication {
                     String message = "";
                     if(e.kind() == StandardWatchEventKind.ENTRY_MODIFY){
                         Path context = (Path)e.context();
-                        message = context.toString() + " modified";
                         
-                        // context.toString() should be filename, check if it is a less file
                         String file = context.toString();
                         String filename = file.substring(0, file.lastIndexOf("."));
                         String ext = file.substring(file.lastIndexOf(".") + 1, file.length());
 
                         if(ext.equals("less")){
-                            String src = file;
                             String target = filename + ".css";
-                            String command = "cmd.exe /k cd " + path + " && lessc.cmd \"" + src + "\" \"" + target + "\"";
-                            System.out.println(command);
+                            String command = "cmd.exe /k cd " + path + " && lessc.cmd \"" + file + "\" \"" + target + "\"";
+                            
+                            view.txtLog.append("Sent " + file + " to the lessc compiler" + newline);
 
                             Runtime.getRuntime().exec(command);
                         }
                     } else if(e.kind() == StandardWatchEventKind.OVERFLOW){
                         message = "OVERFLOW: more changes happened than we could retreive";
                     }
-                    //System.out.println(message);
                 }
                  
             }  catch (IOException io){

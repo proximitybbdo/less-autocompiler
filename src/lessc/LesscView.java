@@ -105,9 +105,12 @@ public class LesscView extends FrameView {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
-        txtFolder = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         lblFolder = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        txtFolder = new javax.swing.JTextField();
+        btnMonitor = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtLog = new javax.swing.JTextArea();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -119,58 +122,62 @@ public class LesscView extends FrameView {
         statusAnimationLabel = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
 
-        mainPanel.setName("Lessc App"); // NOI18N
+        mainPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mainPanel.setDoubleBuffered(false);
+        mainPanel.setMinimumSize(new java.awt.Dimension(650, 300));
+        mainPanel.setName("Less Autocompiler"); // NOI18N
+        mainPanel.setOpaque(false);
+        mainPanel.setPreferredSize(new java.awt.Dimension(650, 300));
+        mainPanel.setSize(new java.awt.Dimension(650, 300));
+        mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(32767, 39));
+        jPanel1.setMinimumSize(new java.awt.Dimension(650, 40));
+        jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(650, 40));
+        jPanel1.setSize(new java.awt.Dimension(650, 40));
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(lessc.LesscApp.class).getContext().getResourceMap(LesscView.class);
+        lblFolder.setText(resourceMap.getString("lblPath.text")); // NOI18N
+        lblFolder.setName("lblPath"); // NOI18N
+        jPanel1.add(lblFolder);
+
         txtFolder.setText(resourceMap.getString("txtPath.text")); // NOI18N
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(lessc.LesscApp.class).getContext().getActionMap(LesscView.class, this);
         txtFolder.setAction(actionMap.get("updatePath")); // NOI18N
+        txtFolder.setMinimumSize(new java.awt.Dimension(424, 28));
         txtFolder.setName("txtPath"); // NOI18N
+        txtFolder.setPreferredSize(new java.awt.Dimension(424, 28));
+        txtFolder.setSize(new java.awt.Dimension(424, 28));
         txtFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFolderActionPerformed(evt);
             }
         });
+        jPanel1.add(txtFolder);
 
-        lblFolder.setText(resourceMap.getString("lblPath.text")); // NOI18N
-        lblFolder.setName("lblPath"); // NOI18N
-
-        jButton1.setToolTipText(resourceMap.getString("jButton1.toolTipText")); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setLabel(resourceMap.getString("jButton1.label")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnMonitor.setText(resourceMap.getString("btnMonitor.text")); // NOI18N
+        btnMonitor.setName("btnMonitor"); // NOI18N
+        btnMonitor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnMonitorActionPerformed(evt);
             }
         });
+        jPanel1.add(btnMonitor);
 
-        org.jdesktop.layout.GroupLayout mainPanelLayout = new org.jdesktop.layout.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(mainPanelLayout.createSequentialGroup()
-                        .add(lblFolder)
-                        .add(419, 419, 419))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .add(txtFolder, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .add(jButton1)))
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(lblFolder)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(txtFolder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jButton1)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
+        mainPanel.add(jPanel1);
+
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        txtLog.setColumns(20);
+        txtLog.setEditable(false);
+        txtLog.setFont(resourceMap.getFont("txtLog.font")); // NOI18N
+        txtLog.setRows(5);
+        txtLog.setName("txtLog"); // NOI18N
+        txtLog.setPreferredSize(new java.awt.Dimension(650, 100));
+        jScrollPane1.setViewportView(txtLog);
+
+        mainPanel.add(jScrollPane1);
 
         menuBar.setName("menuBar"); // NOI18N
 
@@ -231,19 +238,20 @@ public class LesscView extends FrameView {
 
         setComponent(mainPanel);
         setMenuBar(menuBar);
-        setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        app.startWatching(txtFolder.getText());
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFolderActionPerformed
         app.startWatching(txtFolder.getText());
     }//GEN-LAST:event_txtFolderActionPerformed
 
+    private void btnMonitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonitorActionPerformed
+        app.startWatching(txtFolder.getText());
+    }//GEN-LAST:event_btnMonitorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnMonitor;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFolder;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
@@ -252,6 +260,7 @@ public class LesscView extends FrameView {
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
     public javax.swing.JTextField txtFolder;
+    public javax.swing.JTextArea txtLog;
     // End of variables declaration//GEN-END:variables
 
     private final Timer messageTimer;
