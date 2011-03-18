@@ -105,42 +105,55 @@ public class LesscView extends FrameView {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel(){
+            protected void paintComponent(java.awt.Graphics g)
+            {
+                super.paintComponent( g );
+                int panelHeight = getHeight();
+                int panelWidth = getWidth();
+
+                java.awt.Color start = new java.awt.Color(58, 82, 132);
+                java.awt.Color end = new java.awt.Color(32, 47, 78);
+
+                java.awt.GradientPaint gradientPaint = new java.awt.GradientPaint( 0 , 0 , start , 0, panelHeight , end );
+                if( g instanceof java.awt.Graphics2D )
+                {
+                    java.awt.Graphics2D graphics2D = (java.awt.Graphics2D)g;
+                    graphics2D.setPaint( gradientPaint );
+                    graphics2D.fillRect( 0 , 0 , panelWidth , panelHeight );
+                }
+            }
+        };
         lblFolder = new javax.swing.JLabel();
         txtFolder = new javax.swing.JTextField();
         btnMonitor = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtLog = new javax.swing.JTextArea();
-        menuBar = new javax.swing.JMenuBar();
-        javax.swing.JMenu fileMenu = new javax.swing.JMenu();
-        javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
-        javax.swing.JMenu helpMenu = new javax.swing.JMenu();
-        javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
+        tblLog = new javax.swing.JTable();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(lessc.LesscApp.class).getContext().getResourceMap(LesscView.class);
+        mainPanel.setBackground(resourceMap.getColor("Less Autocompiler.background")); // NOI18N
         mainPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mainPanel.setDoubleBuffered(false);
         mainPanel.setMinimumSize(new java.awt.Dimension(650, 300));
         mainPanel.setName("Less Autocompiler"); // NOI18N
-        mainPanel.setOpaque(false);
         mainPanel.setPreferredSize(new java.awt.Dimension(650, 300));
         mainPanel.setSize(new java.awt.Dimension(650, 300));
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
+        jPanel1.setBackground(resourceMap.getColor("jPanel1.background")); // NOI18N
         jPanel1.setMaximumSize(new java.awt.Dimension(32767, 39));
         jPanel1.setMinimumSize(new java.awt.Dimension(650, 40));
         jPanel1.setName("jPanel1"); // NOI18N
-        jPanel1.setPreferredSize(new java.awt.Dimension(650, 40));
-        jPanel1.setSize(new java.awt.Dimension(650, 40));
+        jPanel1.setPreferredSize(new java.awt.Dimension(650, 90));
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(lessc.LesscApp.class).getContext().getResourceMap(LesscView.class);
+        lblFolder.setForeground(resourceMap.getColor("lblPath.foreground")); // NOI18N
         lblFolder.setText(resourceMap.getString("lblPath.text")); // NOI18N
         lblFolder.setName("lblPath"); // NOI18N
-        jPanel1.add(lblFolder);
 
         txtFolder.setText(resourceMap.getString("txtPath.text")); // NOI18N
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(lessc.LesscApp.class).getContext().getActionMap(LesscView.class, this);
@@ -148,13 +161,11 @@ public class LesscView extends FrameView {
         txtFolder.setMinimumSize(new java.awt.Dimension(424, 28));
         txtFolder.setName("txtPath"); // NOI18N
         txtFolder.setPreferredSize(new java.awt.Dimension(424, 28));
-        txtFolder.setSize(new java.awt.Dimension(424, 28));
         txtFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFolderActionPerformed(evt);
             }
         });
-        jPanel1.add(txtFolder);
 
         btnMonitor.setText(resourceMap.getString("btnMonitor.text")); // NOI18N
         btnMonitor.setName("btnMonitor"); // NOI18N
@@ -163,41 +174,74 @@ public class LesscView extends FrameView {
                 btnMonitorActionPerformed(evt);
             }
         });
-        jPanel1.add(btnMonitor);
+
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .add(lblFolder)
+                .add(5, 5, 5)
+                .add(txtFolder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(5, 5, 5)
+                .add(btnMonitor)
+                .add(28, 28, 28))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(6, 6, 6)
+                        .add(lblFolder))
+                    .add(txtFolder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnMonitor))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         mainPanel.add(jPanel1);
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        txtLog.setColumns(20);
-        txtLog.setEditable(false);
-        txtLog.setFont(resourceMap.getFont("txtLog.font")); // NOI18N
-        txtLog.setRows(5);
-        txtLog.setName("txtLog"); // NOI18N
-        txtLog.setPreferredSize(new java.awt.Dimension(650, 100));
-        jScrollPane1.setViewportView(txtLog);
+        tblLog.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Time", "Logline"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblLog.setGridColor(resourceMap.getColor("tblLog.gridColor")); // NOI18N
+        tblLog.setName("tblLog"); // NOI18N
+        tblLog.setRowHeight(20);
+        tblLog.setSelectionBackground(resourceMap.getColor("tblLog.selectionBackground")); // NOI18N
+        tblLog.setShowGrid(true);
+        tblLog.setShowVerticalLines(false);
+        jScrollPane1.setViewportView(tblLog);
+        tblLog.getColumnModel().getColumn(0).setMinWidth(60);
+        tblLog.getColumnModel().getColumn(0).setPreferredWidth(60);
+        tblLog.getColumnModel().getColumn(0).setMaxWidth(60);
+        tblLog.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tblLog.columnModel.title0")); // NOI18N
+        tblLog.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tblLog.columnModel.title1")); // NOI18N
 
         mainPanel.add(jScrollPane1);
-
-        menuBar.setName("menuBar"); // NOI18N
-
-        fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
-        fileMenu.setName("fileMenu"); // NOI18N
-
-        exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
-        exitMenuItem.setName("exitMenuItem"); // NOI18N
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
-        helpMenu.setName("helpMenu"); // NOI18N
-
-        aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
-        aboutMenuItem.setName("aboutMenuItem"); // NOI18N
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
 
         statusPanel.setName("statusPanel"); // NOI18N
 
@@ -237,7 +281,6 @@ public class LesscView extends FrameView {
         );
 
         setComponent(mainPanel);
-        setMenuBar(menuBar);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFolderActionPerformed
@@ -254,13 +297,12 @@ public class LesscView extends FrameView {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFolder;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    public javax.swing.JTable tblLog;
     public javax.swing.JTextField txtFolder;
-    public javax.swing.JTextArea txtLog;
     // End of variables declaration//GEN-END:variables
 
     private final Timer messageTimer;
