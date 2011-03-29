@@ -38,7 +38,9 @@ public class Watcher {
     private JTable logger;
 
     private String LESS_EXTENSION = "less";
-    private Integer TIMER_INTERVAL = 50;
+    private Integer TIMER_INTERVAL = 1000;
+
+    private String prevfile = "";
 
     private final static String newline = "\n";
 
@@ -69,10 +71,13 @@ public class Watcher {
 
         startTimer();
     }
-    
-    private void addLogline(String log) {
+
+    public void addLogline(String log) {
         DefaultTableModel sc = (DefaultTableModel) logger.getModel();
         sc.addRow(new Object[] { now(), log });
+
+        // scroll to last line
+        logger.scrollRectToVisible(logger.getCellRect(logger.getRowCount()-1, 0, true));
 
         System.err.println(now() + " " + log);
     }
@@ -91,6 +96,9 @@ public class Watcher {
         }
 
         public void run(){
+
+            prevfile = "";
+
             WatchKey signalledKey;
             try {
                 signalledKey = service.take();
@@ -110,9 +118,11 @@ public class Watcher {
                         String filename = file.substring(0, file.lastIndexOf("."));
                         String ext = file.substring(file.lastIndexOf(".") + 1, file.length());
 
-                        if(ext.equals("less")){
+                        if(ext.equals("less") && !prevfile.equals(file)){
                             String target = filename + ".css";
                             String command = "cmd.exe /k cd " + path + " && lessc.cmd \"" + file + "\" \"" + target + "\"";
+
+                            prevfile = file;
 
                             addLogline("Sent " + file + " to the lessc compiler" + newline);
 

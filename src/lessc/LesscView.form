@@ -49,11 +49,13 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="30" max="32767" attributes="0"/>
                       <Component id="lblFolder" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="5" pref="5" max="5" attributes="0"/>
-                      <Component id="txtFolder" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="5" pref="5" max="5" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Component id="txtFolder" min="-2" pref="334" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnChooseFile" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="btnMonitor" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -62,12 +64,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="txtFolder" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnMonitor" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnChooseFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Component id="lblFolder" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtFolder" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnMonitor" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -110,6 +115,15 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMonitorActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnChooseFile">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="btnChooseFile.text"/>
+                <Property name="name" type="java.lang.String" value="btnChooseFile" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChooseFileActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -243,9 +257,6 @@
   <Properties>
     <Property name="component" type="javax.swing.JComponent" editor="org.netbeans.modules.form.ComponentChooserEditor">
       <ComponentRef name="mainPanel"/>
-    </Property>
-    <Property name="menuBar" type="javax.swing.JMenuBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
-      <ComponentRef name="default"/>
     </Property>
   </Properties>
   <AuxValues>

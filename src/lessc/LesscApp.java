@@ -25,7 +25,7 @@ import sun.tools.util.CommandLine;
  */
 public class LesscApp extends SingleFrameApplication {
 
-    private Watcher watcher;
+    public Watcher watcher;
     private LesscView view;
 
     private final static String newline = "\n";

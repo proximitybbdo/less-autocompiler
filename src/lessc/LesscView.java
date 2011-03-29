@@ -11,9 +11,11 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 /**
@@ -22,11 +24,17 @@ import javax.swing.JFrame;
 public class LesscView extends FrameView {
 
     private LesscApp app;
+    private JFileChooser fc;
 
     public LesscView(SingleFrameApplication app) {
         super(app);
 
         this.app = (LesscApp) app;
+
+        // file chooser
+        fc = new JFileChooser();
+        fc.setDialogTitle("Select a folder to watch");
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         initComponents();
 
@@ -127,6 +135,7 @@ public class LesscView extends FrameView {
         lblFolder = new javax.swing.JLabel();
         txtFolder = new javax.swing.JTextField();
         btnMonitor = new javax.swing.JButton();
+        btnChooseFile = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLog = new javax.swing.JTable();
         statusPanel = new javax.swing.JPanel();
@@ -175,6 +184,14 @@ public class LesscView extends FrameView {
             }
         });
 
+        btnChooseFile.setText(resourceMap.getString("btnChooseFile.text")); // NOI18N
+        btnChooseFile.setName("btnChooseFile"); // NOI18N
+        btnChooseFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChooseFileActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -183,21 +200,25 @@ public class LesscView extends FrameView {
                 .addContainerGap(30, Short.MAX_VALUE)
                 .add(lblFolder)
                 .add(5, 5, 5)
-                .add(txtFolder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(5, 5, 5)
+                .add(txtFolder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 334, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(btnChooseFile)
+                .add(22, 22, 22)
                 .add(btnMonitor)
-                .add(28, 28, 28))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(txtFolder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(btnMonitor)
+                        .add(btnChooseFile))
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(6, 6, 6)
-                        .add(lblFolder))
-                    .add(txtFolder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btnMonitor))
+                        .add(lblFolder)))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -291,7 +312,22 @@ public class LesscView extends FrameView {
         app.startWatching(txtFolder.getText());
     }//GEN-LAST:event_btnMonitorActionPerformed
 
+    private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
+        int returnval = fc.showOpenDialog(null);
+        if(returnval == fc.APPROVE_OPTION){
+            File file = fc.getSelectedFile();
+            String path = file.getAbsolutePath();
+
+            app.watcher.addLogline("Folder selected: " + path);
+            txtFolder.setText(path);
+            app.startWatching(path);
+        } else {
+            app.watcher.addLogline("No folder selected...");
+        }
+    }//GEN-LAST:event_btnChooseFileActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChooseFile;
     private javax.swing.JButton btnMonitor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

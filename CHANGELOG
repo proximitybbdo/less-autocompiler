@@ -1,0 +1,4 @@
+v0.6 - 29/03/2011
+-------------------
+- added JFileChooser to select a folder
+- autoscroll to last entry in log table
