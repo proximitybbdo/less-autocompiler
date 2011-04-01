@@ -40,8 +40,6 @@ public class Watcher {
     private String LESS_EXTENSION = "less";
     private Integer TIMER_INTERVAL = 1000;
 
-    private String prevfile = "";
-
     private final static String newline = "\n";
 
     public Watcher(JTable logger) {
@@ -96,9 +94,6 @@ public class Watcher {
         }
 
         public void run(){
-
-            prevfile = "";
-
             WatchKey signalledKey;
             try {
                 signalledKey = service.take();
@@ -118,11 +113,9 @@ public class Watcher {
                         String filename = file.substring(0, file.lastIndexOf("."));
                         String ext = file.substring(file.lastIndexOf(".") + 1, file.length());
 
-                        if(ext.equals("less") && !prevfile.equals(file)){
+                        if(ext.equals("less")){
                             String target = filename + ".css";
                             String command = "cmd.exe /k cd " + path + " && lessc.cmd \"" + file + "\" \"" + target + "\"";
-
-                            prevfile = file;
 
                             addLogline("Sent " + file + " to the lessc compiler" + newline);
 
