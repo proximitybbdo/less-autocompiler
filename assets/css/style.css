@@ -4,14 +4,12 @@
 /* 	Primary Styles
 	Author:
 */
-html {
-  font-family: Helvetica, Arial, sans-serif;
+html body {
   background-color: #dcdcdc;
   background-repeat: no-repeat;
   background-image: -moz-linear-gradient(100% 100% 90deg, #dcdcdc, #ffffff);
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#dcdcdc));
-}
-html body {
+  font-family: Helvetica, Arial, sans-serif;
   width: 600px;
   margin: 0 auto;
   padding: 20px;
