@@ -28,7 +28,7 @@ header h3 {
   display: none;
 }
 article {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif !important;
   font-size: 18px;
 }
 article p {
