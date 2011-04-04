@@ -53,12 +53,15 @@ article {
 	}
 	
 	section {
-		padding: 20px;
-		
+		padding: 10px;
+	  width: 350px;
+	  
 		strong { 
 			background-color: #CFEDCB;
 			padding: 4px 2px;			
 		}
+
+		em { font-style: italic; font-family: arial; }
 		
 		a { 
 			color: #444;
@@ -71,6 +74,10 @@ article {
 			}
 		}
 	}
+
+	aside {
+    float: right;
+  }
 }
 
 #notice {
@@ -80,8 +87,35 @@ article {
 	.rounded(5px);
 }
 
+aside {
+	width: 245px;
+
+  #downloads {
+    margin-top: 0px;
+    width: 100% !important;
+
+    ul { margin: 0; }
+    li {
+
+      margin-bottom: 40px;
+      float: left;
+
+      h2 { margin-bottom: 15px; }
+
+      .button {
+        .rounded(5px);
+        border: 1px solid #d8d8d8;
+        .gradient(#e3e3e3, #fcfcfc);
+        padding: 10px 12px;
+        text-decoration: none;
+        font-weight: normal;
+      }
+    }
+  }
+}
+
 footer {
-	margin-top: 80px;
+	margin-top: 40px;
 	padding: 20px;
 	text-align: center;
 	background-color: #ccc;
@@ -100,5 +134,26 @@ footer {
 	}
 	
 	.rounded(5px);
-	
 }
+
+/* 
+*    When screen is smaller than 500px 
+*/ 
+@media only screen and (max-width:600px){ 
+  body {
+    width: 600px;
+
+    section { 
+    	width: 520px;
+    }
+
+    aside {
+    	width: 100%;
+    	padding: 0;
+      
+    	li { float: left; }
+    }
+
+    footer { width: 500px; }
+  }
+} 

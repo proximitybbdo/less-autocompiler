@@ -35,11 +35,16 @@ article p {
   margin-bottom: 20px;
 }
 article section {
-  padding: 20px;
+  padding: 10px;
+  width: 350px;
 }
 article section strong {
   background-color: #CFEDCB;
   padding: 4px 2px;
+}
+article section em {
+  font-style: italic;
+  font-family: arial;
 }
 article section a {
   color: #444;
@@ -49,6 +54,9 @@ article section a {
 }
 article section a:visited {
   color: black;
+}
+article aside {
+  float: right;
 }
 #notice {
   background-color: #efefef;
@@ -60,8 +68,36 @@ article section a:visited {
 #notice p {
   margin: 0;
 }
+aside {
+  width: 245px;
+}
+aside #downloads {
+  margin-top: 0px;
+  width: 100% !important;
+}
+aside #downloads ul {
+  margin: 0;
+}
+aside #downloads li {
+  margin-bottom: 40px;
+  float: left;
+}
+aside #downloads li h2 {
+  margin-bottom: 15px;
+}
+aside #downloads li .button {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #d8d8d8;
+  background-image: -moz-linear-gradient(100% 100% 90deg, #e3e3e3, #fcfcfc);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#e3e3e3));
+  padding: 10px 12px;
+  text-decoration: none;
+  font-weight: normal;
+}
 footer {
-  margin-top: 80px;
+  margin-top: 40px;
   padding: 20px;
   text-align: center;
   background-color: #ccc;
@@ -80,4 +116,24 @@ footer a {
 }
 footer a:hover, footer a:visited {
   color: #777;
+}
+/* 
+*    When screen is smaller than 500px 
+*/@media only screen and (max-width:600px) {
+  body {
+    width: 600px;
+  }
+  body section {
+    width: 520px;
+  }
+  body aside {
+    width: 100%;
+    padding: 0;
+  }
+  body aside li {
+    float: left;
+  }
+  body footer {
+    width: 500px;
+  }
 }
