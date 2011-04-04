@@ -119,12 +119,12 @@ footer a:hover, footer a:visited {
 }
 /* 
 *    When screen is smaller than 500px 
-*/@media only screen and (max-width:600px) {
+*/@media only screen and (max-width:480px) {
   body {
-    width: 600px;
+    width: 480px;
   }
   body section {
-    width: 520px;
+    width: 400px;
   }
   body aside {
     width: 100%;
@@ -132,8 +132,9 @@ footer a:hover, footer a:visited {
   }
   body aside li {
     float: left;
+    margin-right: 25px;
   }
   body footer {
-    width: 500px;
+    width: 380px;
   }
 }

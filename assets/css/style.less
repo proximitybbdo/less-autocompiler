@@ -139,21 +139,24 @@ footer {
 /* 
 *    When screen is smaller than 500px 
 */ 
-@media only screen and (max-width:600px){ 
+@media only screen and (max-width:480px){ 
   body {
-    width: 600px;
+    width: 480px;
 
     section { 
-    	width: 520px;
+    	width: 400px;
     }
 
     aside {
     	width: 100%;
     	padding: 0;
       
-    	li { float: left; }
+    	li { 
+    		float: left;
+    		margin-right: 25px;
+    	}
     }
 
-    footer { width: 500px; }
+    footer { width: 380px; }
   }
 } 
