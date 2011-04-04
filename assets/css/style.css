@@ -11,7 +11,7 @@ html {
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#dcdcdc));
 }
 html body {
-  width: 600px;
+  width: 640px;
   margin: 0 auto;
   padding: 20px;
   text-shadow: 1px 1px 1px white;
