@@ -4,11 +4,13 @@
 /* 	Primary Styles
 	Author:
 */
-html body {
+html {
   background-color: #dcdcdc;
   background-repeat: no-repeat;
   background-image: -moz-linear-gradient(100% 100% 90deg, #dcdcdc, #ffffff);
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#dcdcdc));
+}
+html body {
   width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -121,20 +123,27 @@ footer a:hover, footer a:visited {
 *    When screen is smaller than 500px 
 */@media only screen and (max-width:480px) {
   body {
-    width: 480px;
-  }
-  body section {
     width: 400px;
   }
-  body aside {
-    width: 100%;
+  body header {
+    padding-left: 0;
+  }
+  body header h1 {
+    font-size: 22px;
+  }
+  body section {
+    width: 270px;
+    clear: both;
     padding: 0;
   }
-  body aside li {
-    float: left;
-    margin-right: 25px;
+  body aside {
+    display: none;
+  }
+  body #notice {
+    padding: 10px;
+    background-color: transparent;
   }
   body footer {
-    width: 380px;
+    width: 230px;
   }
 }

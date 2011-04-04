@@ -17,10 +17,10 @@
 }
 
 html {
-	body {
 		background-color: #dcdcdc;
 		background-repeat: no-repeat;
 		.gradient(#dcdcdc, #fff);
+	body {
 		width: 600px;
 		margin: 0 auto;
 		padding: 20px;
@@ -141,22 +141,31 @@ footer {
 */ 
 @media only screen and (max-width:480px){ 
   body {
-    width: 480px;
+    width: 400px;
+
+    header {
+    	padding-left: 0;
+
+      h1 { 
+        font-size: 22px;
+      }
+    }
 
     section { 
-    	width: 400px;
+    	width: 270px;
+      clear: both; 
+    	padding: 0;
     }
 
     aside {
-    	width: 100%;
-    	padding: 0;
-      
-    	li { 
-    		float: left;
-    		margin-right: 25px;
-    	}
+    	display: none;
     }
 
-    footer { width: 380px; }
+    #notice {
+    	padding: 10px;
+    	background-color: transparent; 
+    }
+
+    footer { width: 230px; }
   }
 } 
