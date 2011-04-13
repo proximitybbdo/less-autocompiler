@@ -5,7 +5,10 @@
 
 package lessc;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,9 +39,10 @@ public class Watcher {
     private Path watchedPath;
     private LesscView view;
     private JTable logger;
+    private String lastline;
 
     private String LESS_EXTENSION = "less";
-    private Integer TIMER_INTERVAL = 1000;
+    private Integer TIMER_INTERVAL = 500;
 
     private final static String newline = "\n";
 
@@ -88,9 +92,11 @@ public class Watcher {
 
     class CheckDirTask extends TimerTask {
         private WatchService service;
+        private Watcher watcher;
 
-        public CheckDirTask(WatchService service){
+        public CheckDirTask(WatchService service, Watcher watcher){
             this.service = service;
+            this.watcher = watcher;
         }
 
         public void run(){
@@ -104,6 +110,8 @@ public class Watcher {
                 // key to be reported again by the watch service
                 signalledKey.reset();
 
+                watcher.lastline = "";
+
                 for(WatchEvent e : list){
                     String message = "";
                     if(e.kind() == StandardWatchEventKind.ENTRY_MODIFY){
@@ -114,12 +122,39 @@ public class Watcher {
                         String ext = file.substring(file.lastIndexOf(".") + 1, file.length());
 
                         if(ext.equals("less")){
-                            String target = filename + ".css";
-                            String command = "cmd.exe /k cd " + path + " && lessc.cmd \"" + file + "\" \"" + target + "\"";
 
+                            // check for fast double messages
+                            if(context.toString().equals(watcher.lastline))
+                                return;
+                            else
+                                watcher.lastline = context.toString();
+
+                            String target = filename + ".css";
+                            
+                            String command = "cmd.exe /C cd " + path + " && lessc \"" + file + "\" \"" + target + "\"";
                             addLogline("Sent " + file + " to the lessc compiler" + newline);
 
-                            Runtime.getRuntime().exec(command);
+                            try {
+                                Runtime rt = Runtime.getRuntime();
+                                Process proc = rt.exec(command);
+
+                                // any error message?
+                                StreamGobbler errorGobbler = new
+                                    StreamGobbler(proc.getErrorStream(), "ERROR", watcher);
+
+                                // any output?
+                                StreamGobbler outputGobbler = new
+                                    StreamGobbler(proc.getInputStream(), "OUTPUT", watcher);
+
+                                // kick them off
+                                errorGobbler.start();
+                                outputGobbler.start();
+
+                                // any error???
+                                int exitVal = proc.waitFor();
+                            } catch (Throwable t) {
+                                t.printStackTrace();
+                            }
                         }
                     } else if(e.kind() == StandardWatchEventKind.OVERFLOW){
                         addLogline("OVERFLOW: more changes happened than we could retreive");
@@ -127,9 +162,6 @@ public class Watcher {
                 }
 
                 list = null;
-
-            }  catch (IOException io){
-                addLogline("IO exc:" + io.toString());
             } catch (InterruptedException ix){
                 addLogline("InterruptedException: " + ix.toString());
             } catch (ClosedWatchServiceException cwse){
@@ -145,6 +177,35 @@ public class Watcher {
 
     private void startTimer() {
         tmr.purge();
-        tmr.scheduleAtFixedRate(new CheckDirTask(service), 0, TIMER_INTERVAL);
+        tmr.scheduleAtFixedRate(new CheckDirTask(service, this), 0, TIMER_INTERVAL);
+    }
+}
+
+class StreamGobbler extends Thread {
+    InputStream is;
+    String type;
+    Watcher watcher;
+
+    StreamGobbler(InputStream is, String type, Watcher watcher) {
+        this.is = is;
+        this.type = type;
+        this.watcher = watcher;
+    }
+
+    @Override
+    public void run() {
+        try {
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String line=null;
+            String total="";
+            while ( (line = br.readLine()) != null)
+                total = total.concat(line);
+
+            if(!total.equals(""))
+                watcher.addLogline(total);
+        } catch (IOException ioe) {
+                ioe.printStackTrace();
+        }
     }
 }
