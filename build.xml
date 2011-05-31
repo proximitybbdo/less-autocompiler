@@ -72,13 +72,12 @@
 
     -->
     <target name="-post-jar">
-        <property name="version.num" value="0."/>
-        <buildnumber file="build.num"/>
+        <property name="version.num" value="0.8"/>
         <tstamp>
             <format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
         </tstamp>
 
-        <property name="store.jar.name" value="LesscAutocompiler-${version.num}${build.number}"/>
+        <property name="store.jar.name" value="LesscAutocompiler-${version.num}"/>
         <property name="store.dir" value="download"/>
         <property name="store.jar" value="${store.dir}/${store.jar.name}.jar"/>
 

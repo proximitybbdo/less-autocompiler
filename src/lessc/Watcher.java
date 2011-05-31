@@ -56,6 +56,8 @@ public class Watcher {
      * @param path
      */
     public void watch(String path) {
+        reset();
+
         this.path = path;
 
         service = FileSystems.getDefault().newWatchService();
@@ -72,6 +74,15 @@ public class Watcher {
         }
 
         startTimer();
+    }
+
+    private void reset() {
+        if(tmr != null)
+            tmr.purge();
+
+        service = null;
+        watchedPath = null;
+        this.path = null;
     }
 
     public void addLogline(String log) {

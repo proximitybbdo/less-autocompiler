@@ -134,8 +134,8 @@ public class LesscView extends FrameView {
         };
         lblFolder = new javax.swing.JLabel();
         txtFolder = new javax.swing.JTextField();
-        btnMonitor = new javax.swing.JButton();
         btnChooseFile = new javax.swing.JButton();
+        btnMonitor = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLog = new javax.swing.JTable();
         statusPanel = new javax.swing.JPanel();
@@ -155,34 +155,29 @@ public class LesscView extends FrameView {
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
         jPanel1.setBackground(resourceMap.getColor("jPanel1.background")); // NOI18N
-        jPanel1.setMaximumSize(new java.awt.Dimension(32767, 39));
+        jPanel1.setMaximumSize(new java.awt.Dimension(10650, 40));
         jPanel1.setMinimumSize(new java.awt.Dimension(650, 40));
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(650, 90));
+        jPanel1.setSize(new java.awt.Dimension(650, 90));
 
         lblFolder.setForeground(resourceMap.getColor("lblPath.foreground")); // NOI18N
         lblFolder.setText(resourceMap.getString("lblPath.text")); // NOI18N
         lblFolder.setName("lblPath"); // NOI18N
+        jPanel1.add(lblFolder);
 
         txtFolder.setText(resourceMap.getString("txtPath.text")); // NOI18N
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(lessc.LesscApp.class).getContext().getActionMap(LesscView.class, this);
         txtFolder.setAction(actionMap.get("updatePath")); // NOI18N
         txtFolder.setMinimumSize(new java.awt.Dimension(424, 28));
         txtFolder.setName("txtPath"); // NOI18N
-        txtFolder.setPreferredSize(new java.awt.Dimension(424, 28));
+        txtFolder.setPreferredSize(new java.awt.Dimension(300, 28));
         txtFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFolderActionPerformed(evt);
             }
         });
-
-        btnMonitor.setText(resourceMap.getString("btnMonitor.text")); // NOI18N
-        btnMonitor.setName("btnMonitor"); // NOI18N
-        btnMonitor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMonitorActionPerformed(evt);
-            }
-        });
+        jPanel1.add(txtFolder);
 
         btnChooseFile.setText(resourceMap.getString("btnChooseFile.text")); // NOI18N
         btnChooseFile.setName("btnChooseFile"); // NOI18N
@@ -191,36 +186,16 @@ public class LesscView extends FrameView {
                 btnChooseFileActionPerformed(evt);
             }
         });
+        jPanel1.add(btnChooseFile);
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .add(lblFolder)
-                .add(5, 5, 5)
-                .add(txtFolder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 334, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(btnChooseFile)
-                .add(22, 22, 22)
-                .add(btnMonitor)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(txtFolder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(btnMonitor)
-                        .add(btnChooseFile))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(6, 6, 6)
-                        .add(lblFolder)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        btnMonitor.setText(resourceMap.getString("btnMonitor.text")); // NOI18N
+        btnMonitor.setName("btnMonitor"); // NOI18N
+        btnMonitor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonitorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMonitor);
 
         mainPanel.add(jPanel1);
 

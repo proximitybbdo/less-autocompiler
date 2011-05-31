@@ -29,7 +29,7 @@
           <Properties>
             <Property name="background" type="java.awt.Color" resourceKey="jPanel1.background"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[32767, 39]"/>
+              <Dimension value="[10650, 40]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[650, 40]"/>
@@ -38,47 +38,15 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[650, 90]"/>
             </Property>
+            <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[650, 90]"/>
+            </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    protected void paintComponent(java.awt.Graphics g)&#xa;    {&#xa;        super.paintComponent( g );&#xa;        int panelHeight = getHeight();&#xa;        int panelWidth = getWidth();&#xa;&#xa;        java.awt.Color start = new java.awt.Color(58, 82, 132);&#xa;    java.awt.Color end = new java.awt.Color(32, 47, 78);&#xa;&#xa;java.awt.GradientPaint gradientPaint = new java.awt.GradientPaint( 0 , 0 , start , 0, panelHeight , end );&#xa;if( g instanceof java.awt.Graphics2D )&#xa;{&#xa;    java.awt.Graphics2D graphics2D = (java.awt.Graphics2D)g;&#xa;    graphics2D.setPaint( gradientPaint );&#xa;    graphics2D.fillRect( 0 , 0 , panelWidth , panelHeight );&#xa;}&#xa;}&#xa;}"/>
           </AuxValues>
 
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="30" max="32767" attributes="0"/>
-                      <Component id="lblFolder" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                      <Component id="txtFolder" min="-2" pref="334" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnChooseFile" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="btnMonitor" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="txtFolder" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnMonitor" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnChooseFile" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Component id="lblFolder" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lblFolder">
               <Properties>
@@ -98,7 +66,7 @@
                 </Property>
                 <Property name="name" type="java.lang.String" value="txtPath" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[424, 28]"/>
+                  <Dimension value="[300, 28]"/>
                 </Property>
               </Properties>
               <Events>
@@ -108,15 +76,6 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="btnMonitor">
-              <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="btnMonitor.text"/>
-                <Property name="name" type="java.lang.String" value="btnMonitor" noResource="true"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMonitorActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="btnChooseFile">
               <Properties>
                 <Property name="text" type="java.lang.String" resourceKey="btnChooseFile.text"/>
@@ -124,6 +83,15 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChooseFileActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnMonitor">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="btnMonitor.text"/>
+                <Property name="name" type="java.lang.String" value="btnMonitor" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMonitorActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
